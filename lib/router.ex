@@ -1,5 +1,5 @@
 defmodule Router do
-  alias Plug.Conn
+  import Plug.Conn
 
   def init(default_opts) do
     IO.puts "starting up SimplePlug..."
@@ -10,8 +10,8 @@ defmodule Router do
     route(conn.method, conn.path_info, conn)
   end
 
-  # this route is for /hello
-  def route("GET", ["hello"], conn) do
+  # this route is for /api
+  def route("GET", ["api"], conn) do
     data = """
     { "data": "success" }
     """
@@ -19,8 +19,8 @@ defmodule Router do
     |> View.render("application/json", data)
   end
 
-  # this route is for /users/:id
-  def route("GET", ["users", id], conn) do
+  # this route is for /api/users/:id
+  def route("GET", ["api", "users", id], conn) do
     conn
     |> View.render("Your requested user #{id}")
   end
